@@ -1,0 +1,17 @@
+{
+  "name": "wirabot",
+  "version": "1.0.0",
+  "description": "Bot para gerenciamento de servidores do Discord",
+  "license": "ISC",
+  "author": "Davi Felipe Silva Clemente",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ascii-table": "^0.0.9",
+    "discord.js": "^14.22.1",
+    "nodemon": "^3.1.10"
+  }
+}

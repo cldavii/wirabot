@@ -1,8 +1,16 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder().setName('ping').setDescription('Comando para testar a aplicação. Deve responder com "pong"'),
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Mostra o tempo que o bot leva para responder ao comando'),
+    cooldow: 3,
     async execute(interaction) {
-        await interaction.reply('pong');
+        const sent = await interaction.reply({
+            content: 'Pingando...',
+            withResponse: true,
+            flags: MessageFlags.Ephemeral
+        });
+        interaction.editReply(`**${sent.resource.message.createdTimestamp - interaction.createdTimestamp}**ms `);
     }
 }

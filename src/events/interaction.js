@@ -45,15 +45,30 @@ module.exports = {
                         flags: MessageFlags.Ephemeral
                     });
                 }
-            }
-        }
-        if (interaction.isAutocomplete()) {
+            } // Verificando se o comando utiliza um autocomplete
+        } if (interaction.isAutocomplete()) {
             const command = interaction.client.commands.get(interaction.commandName);
             if (!command) return;
             try {
                 await command.autocomplete(interaction);
             } catch (error) {
                 console.error(error);
+            }
+        } if (interaction.isButton()) {
+            if (interaction.customId === 'verifyButton') {
+                const role = interaction.guild.roles.cache.get('1420388235582115993');
+                const checkRole = interaction.member.roles.cache.has(role.id);
+                if (checkRole) {
+                    return interaction.reply({
+                        content: 'Você já foi verificado(a) e já tem acesso ao servidor.',
+                        flags: MessageFlags.Ephemeral
+                    });
+                }
+                await interaction.member.roles.add(role);
+                interaction.reply({
+                    content: `O cargo ${role.name} foi configurado no  seu perfil`,
+                    flags: MessageFlags.Ephemeral
+                });
             }
         }
     }
